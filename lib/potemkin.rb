@@ -1,8 +1,6 @@
-#require_relative 'basic_service'
-
-require_relative 'application'
-require_relative 'server'
-require_relative 'responder'
+require_relative 'potemkin/application'
+require_relative 'potemkin/server'
+require_relative 'potemkin/responder'
 
 def port(p)
   server = Server.new p
