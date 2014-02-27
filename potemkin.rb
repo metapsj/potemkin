@@ -1,12 +1,11 @@
-require 'webrick'
-include WEBrick
+#require_relative 'basic_service'
 
-s = HTTPServer.new( :Port => 2020 )
-
-s.mount_proc("/hello/again") do |req, res|
-  res.body = "<the><same><bit>of XML</bit></same></the>"
-  res['Content-Type'] = "text/xml"
+def port(p)
+  puts "Services for port: #{p}"
 end
 
-trap("INT") { s.shutdown }
-s.start
+def respond(config, &block)
+  puts "Listening on #{config[:resource]}, using block #{block}"
+end
+
+load "services.rb"
