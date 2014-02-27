@@ -2,6 +2,12 @@ require_relative 'potemkin/application'
 require_relative 'potemkin/server'
 require_relative 'potemkin/responder'
 
+if ARGV.size > 0
+  services_path = ARGV.shift
+else
+  services_path = './config/services.rb'
+end
+
 def port(p)
   server = Server.new p
   Application.instance.add_server server
@@ -18,6 +24,6 @@ def respond(config, &block)
   Application.instance.servers.last.add_responder h
 end
 
-load "services.rb"
+load services_path
 
 Application.instance.run
