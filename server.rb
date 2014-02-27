@@ -1,3 +1,5 @@
+require 'webrick'
+
 class Server
   attr_reader :port, :responders
 
@@ -11,7 +13,7 @@ class Server
   end
 
   def run
-    @http_server = HTTPServer.new( :Port => @port )
+    @http_server = WEBrick::HTTPServer.new( :Port => @port )
     
     @responders.each do |h|
       @http_server.mount_proc(h.resource) do |request, response|

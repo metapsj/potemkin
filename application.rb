@@ -2,7 +2,9 @@ require 'singleton'
 
 class Application
   include Singleton
-
+  
+  attr_reader :servers
+  
   def initialize
     @servers = []
   end
