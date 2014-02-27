@@ -2,15 +2,15 @@ require 'singleton'
 
 class Application
   include Singleton
-  
+
   def initialize
     @servers = []
   end
-  
+
   def add_server(server)
     @servers << server
   end
-  
+
   def run
     threads = []
     
@@ -21,8 +21,9 @@ class Application
       
       threads.each { |thread| thread.join }
     end
+  end
 
-    def shutdown
-      @servers.each { |server| server.shutdown }
-    end
+  def shutdown
+    @servers.each { |server| server.shutdown }
+  end
 end
