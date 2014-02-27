@@ -1,8 +1,8 @@
 #require_relative 'basic_service'
 
-require 'application'
-require 'server'
-require 'responder'
+require_relative 'application'
+require_relative 'server'
+require_relative 'responder'
 
 def port(p)
   server = Server.new p
