@@ -18,7 +18,7 @@ def respond(config, &block)
 
   h = Responder.new(resource) do |request, response|
     response['Content-Type'] = 'text/xml'
-    block.call(request, response)
+    block.call(request, response) 
   end
 
   Application.instance.servers.last.add_responder h
@@ -27,3 +27,5 @@ end
 load services_path
 
 Application.instance.run
+
+trap("INT") { Application.instance.shutdown }

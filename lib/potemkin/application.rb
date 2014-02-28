@@ -17,12 +17,10 @@ class Application
     threads = []
     
     @servers.each do |server|
-      threads << Thread.new do
-        server.run
-      end
-      
-      threads.each { |thread| thread.join }
+      threads << Thread.new { server.run }
     end
+
+    threads.each { |thread| thread.join }
   end
 
   def shutdown
