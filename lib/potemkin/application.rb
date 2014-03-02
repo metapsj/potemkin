@@ -19,7 +19,7 @@ class Application
     @servers.each do |server|
       threads << Thread.new { server.run }
     end
-
+    
     threads.each { |thread| thread.join }
   end
 

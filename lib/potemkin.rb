@@ -11,6 +11,10 @@ end
 
 load services_path
 
-Application.instance.run
+begin
+  Application.instance.run
+rescue Interrupt
+  Application.instance.shutdown
+end
 
-trap("INT") { Application.instance.shutdown }
+#trap("INT") { Application.instance.shutdown }
