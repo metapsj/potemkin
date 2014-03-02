@@ -16,5 +16,3 @@ begin
 rescue Interrupt
   Application.instance.shutdown
 end
-
-#trap("INT") { Application.instance.shutdown }
