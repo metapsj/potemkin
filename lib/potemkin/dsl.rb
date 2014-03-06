@@ -1,4 +1,5 @@
 module Kernel
+
   def port(p)
     server = Server.new p
     Application.instance.add_server server
@@ -14,4 +15,5 @@ module Kernel
 
     Application.instance.servers.last.add_responder h
   end
+
 end
