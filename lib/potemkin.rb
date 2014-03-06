@@ -1,18 +1,12 @@
+require_relative 'potemkin/version'
 require_relative 'potemkin/application'
-require_relative 'potemkin/server'
-require_relative 'potemkin/responder'
-require_relative 'potemkin/dsl'
+require_relative 'core_ext/object'
 
-if ARGV.size > 0
-  services_path = ARGV.shift
-else
-  services_path = './config/services.rb'
-end
-
-load services_path
+services_path = ARGV.size > 0 ? ARGV.shift : './example/services.rb'
 
 begin
-  Application.instance.run
+  Potemkin::Application.instance.script_path = services_path
+  Potemkin::Application.instance.run
 rescue Interrupt
-  Application.instance.shutdown
+  Potemkin::Application.instance.shutdown
 end
