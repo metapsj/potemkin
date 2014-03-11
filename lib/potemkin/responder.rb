@@ -9,7 +9,8 @@ module Potemkin
         block.call(request, response) 
       end
       
-      Application.instance.servers.last.add_responder h
+      # psj :: doesnt feel right.  app is instanced in potemkin.rb in the kernel
+      App.servers.last.add_responder h
     end
     
     class Responder

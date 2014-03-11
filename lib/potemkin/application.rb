@@ -1,16 +1,14 @@
-require 'singleton'
 require 'optparse'
 
 module Potemkin
 
   class Application
-    include Singleton
+    attr_reader :script_path, :servers
 
-    attr_reader :servers
-    attr_accessor :script, :script_path
-
-    def initialize
+    def initialize(argv)
       @servers = []
+
+      @script_path = argv.size > 0 ? argv.shift : './example/services.rb'
     end
 
     def add_server(server)
@@ -18,10 +16,10 @@ module Potemkin
     end
 
     def run
-      @script = File.read(@script_path)
-
-      self.instance_eval @script, @script_path
-
+      script = File.read(@script_path)
+      
+      self.instance_eval script, @script_path
+      
       threads = []
       
       @servers.each do |server|
@@ -30,13 +28,13 @@ module Potemkin
       
       threads.each { |thread| thread.join }
     end
-
+    
     def shutdown
       @servers.each { |server| server.shutdown }
     end
-
+    
     private 
-
+    
     def parse_options(argv)
       puts 'Application::parse_options'
     end

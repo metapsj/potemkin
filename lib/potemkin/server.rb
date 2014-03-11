@@ -2,12 +2,14 @@ require 'webrick'
 
 module Potemkin
   module Server
-    
-    def port(p)
-      server = Server.new p
-      Application.instance.add_server server
+
+    def port(port)
+      server = Server.new port
+
+      # psj :: this doesnt feel right.  app is instanced in potemkin.rb in the kernel
+      App.add_server server
     end
-    
+
     class Server
       attr_reader :port, :responders
 
@@ -28,7 +30,7 @@ module Potemkin
             h.handle(request, response)
           end
         end
-        
+
         @http_server.start
       end
 

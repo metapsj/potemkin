@@ -2,11 +2,10 @@ require_relative 'potemkin/version'
 require_relative 'potemkin/application'
 require_relative 'core_ext/object'
 
-services_path = ARGV.size > 0 ? ARGV.shift : './example/services.rb'
+App = Potemkin::Application.new(ARGV)
 
 begin
-  Potemkin::Application.instance.script_path = services_path
-  Potemkin::Application.instance.run
+  App.run
 rescue Interrupt
-  Potemkin::Application.instance.shutdown
+  App.shutdown
 end
