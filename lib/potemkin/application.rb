@@ -12,12 +12,16 @@ module Potemkin
       @script_path = argv.size > 0 ? argv.shift : './example/services.rb'
     end
 
-    def start
-      @pool.run(@script_path)
+    def run
+      script = File.read(@script_path)
+      
+      self.instance_eval script, @script_path
+
+      @pool.start
     end
     
     def stop
-      @pool.shutdown
+      @pool.stop
     end
     
     private

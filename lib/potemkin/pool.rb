@@ -15,11 +15,7 @@ module Potemkin
       @servers << server
     end
 
-    def run(script_path)
-      script = File.read(script_path)
-      
-      self.instance_eval script, script_path
-      
+    def start      
       threads = []
       
       @servers.each do |server|
@@ -29,7 +25,7 @@ module Potemkin
       threads.each { |thread| thread.join }
     end
 
-    def shutdown
+    def stop
       @servers.each { |server| server.shutdown }
     end
   end
