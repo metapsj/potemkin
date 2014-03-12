@@ -14,7 +14,7 @@ module Potemkin
       @responders << h
     end
 
-    def run
+    def start
       @http_server = WEBrick::HTTPServer.new( :Port => @port )
       
       @responders.each do |h|
@@ -26,7 +26,7 @@ module Potemkin
       @http_server.start
     end
 
-    def shutdown
+    def stop
       @http_server.shutdown
     end
   end

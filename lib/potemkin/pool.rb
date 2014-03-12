@@ -19,14 +19,14 @@ module Potemkin
       threads = []
       
       @servers.each do |server|
-        threads << Thread.new { server.run }
+        threads << Thread.new { server.start }
       end
       
       threads.each { |thread| thread.join }
     end
 
     def stop
-      @servers.each { |server| server.shutdown }
+      @servers.each { |server| server.stop }
     end
   end
 
