@@ -1,7 +1,7 @@
 require 'singleton'
 
 module Potemkin
-
+  
   class Pool
     include Singleton
 
