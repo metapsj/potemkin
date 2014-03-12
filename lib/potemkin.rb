@@ -5,7 +5,7 @@ require_relative 'core_ext/object'
 app = Potemkin::Application.new(ARGV)
 
 begin
-  app.run
+  app.start
 rescue Interrupt
-  app.shutdown
+  app.stop
 end

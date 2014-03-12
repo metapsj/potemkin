@@ -12,11 +12,11 @@ module Potemkin
       @script_path = argv.size > 0 ? argv.shift : './example/services.rb'
     end
 
-    def run
+    def start
       @pool.run(@script_path)
     end
     
-    def shutdown
+    def stop
       @pool.shutdown
     end
     
