@@ -4,12 +4,12 @@ module Potemkin
 
   class Server
     attr_reader :port, :responders
-
+    
     def initialize(port)
       @port = port
       @responders = []
     end
-
+    
     def add_responder(h)
       @responders << h
     end
