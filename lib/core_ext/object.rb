@@ -1,6 +1,5 @@
-require_relative '../potemkin/server'
-require_relative '../potemkin/responder'
+require_relative '../potemkin/dsl'
 
 class Object
-  include Potemkin::Server, Potemkin::Responder
+  include Potemkin::DSL
 end

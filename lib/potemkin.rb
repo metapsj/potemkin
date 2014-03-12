@@ -2,10 +2,8 @@ require_relative 'potemkin/version'
 require_relative 'potemkin/application'
 require_relative 'core_ext/object'
 
-App = Potemkin::Application.new(ARGV)
-
 begin
-  App.run
+  Potemkin::Application.instance.run(ARGV)
 rescue Interrupt
-  App.shutdown
+  Potemkin::Application.instance.shutdown
 end

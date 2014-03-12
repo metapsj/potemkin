@@ -1,21 +1,26 @@
+require 'singleton'
 require 'optparse'
+require_relative 'server'
+require_relative 'responder'
 
 module Potemkin
 
   class Application
+    include Singleton
+
     attr_reader :script_path, :servers
 
-    def initialize(argv)
+    def initialize
       @servers = []
-
-      @script_path = argv.size > 0 ? argv.shift : './example/services.rb'
     end
 
     def add_server(server)
       @servers << server
     end
 
-    def run
+    def run(argv)
+      @script_path = argv.size > 0 ? argv.shift : './example/services.rb'
+
       script = File.read(@script_path)
       
       self.instance_eval script, @script_path

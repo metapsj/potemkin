@@ -1,19 +1,28 @@
-module Kernel
+require_relative 'server'
+require_relative 'responder'
 
-  def port(p)
-    server = Server.new p
-    Application.instance.add_server server
-  end
+module Potemkin
+  module DSL
 
-  def respond(config, &block)
-    resource = config[:resource]
-
-    h = Responder.new(resource) do |request, response|
-      response['Content-Type'] = 'text/xml'
-      block.call(request, response) 
+    Application = ::Potemkin::Application.instance
+    Server = ::Potemkin::Server
+    Responder = ::Potemkin::Responder
+    
+    def port(p)
+      server = Server.new p
+      Application.add_server server
     end
 
-    Application.instance.servers.last.add_responder h
-  end
+    def respond(config, &block)
+      resource = config[:resource]
 
+      h = Responder.new(resource) do |request, response|
+        response['Content-Type'] = 'text/xml'
+        block.call(request, response) 
+      end
+
+      Application.servers.last.add_responder h
+    end
+    
+  end
 end
