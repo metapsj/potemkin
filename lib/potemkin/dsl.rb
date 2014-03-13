@@ -9,9 +9,12 @@ module Potemkin
     Server = ::Potemkin::Server
     Responder = ::Potemkin::Responder
 
-    def port(p)
+    def port(p, &block)
       server = Server.new p
+      
       Pool.add_server server
+      
+      yield if block_given?
     end
     
     def respond(config, &block)
