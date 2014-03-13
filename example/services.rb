@@ -8,7 +8,7 @@ port 2001 do
   end
 
   respond :resource => "/time" do |request, response|
-    response.body = "<now>#{Time.new}</now>"
+    response.body = "<time>#{Time.new}</time>"
   end
 end
 
@@ -22,6 +22,6 @@ port 2002 do
   end
 
   respond :resource => "/time" do |request, response|
-    response.body = "<now>#{Time.new}</now>"
+    response.body = "<time>#{Time.new}</time>"
   end
 end
